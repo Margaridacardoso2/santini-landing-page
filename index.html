@@ -1,43 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -61,7 +22,7 @@
       font-weight: 700;
     }
     .hero {
-      background: url('https://via.placeholder.com/1200x600.png?text=Hero+Image+Gelado+na+Praia') no-repeat center center/cover; /* Placeholder para image-3.jpg */
+      background: url('background.png') no-repeat center center/cover;
       height: 600px;
       display: flex;
       align-items: center;
@@ -69,21 +30,23 @@
       text-align: center;
       color: #fff;
       position: relative;
-      background-color: rgba(0, 0, 0, 0.3);
-      background-blend-mode: overlay;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
     .hero-content h1 {
       font-size: 2.8em;
       margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
     .hero-content p {
       font-size: 1.3em;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
     .cta-button {
-      background-color: #B22222;
+      background-color: #E30613; /* Vermelho Santini */
       color: #FFFFFF;
       padding: 12px 24px;
       border: none;
@@ -93,7 +56,7 @@
       transition: background-color 0.3s;
     }
     .cta-button:hover {
-      background-color: #8B0000;
+      background-color: #C20510; /* Tom mais escuro do vermelho Santini */
     }
     .section {
       padding: 60px 20px;
@@ -106,11 +69,19 @@
       margin-top: 30px;
     }
     .flavor-card {
-      background: #FFFACD; /* Amarelo limão pastel */
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
       position: relative;
+    }
+    .flavor-card.maracuja-hortela {
+      background: #D9E8D6; /* Verde pastel cremoso para Maracujá com Hortelã */
+    }
+    .flavor-card.limao-manjericao {
+      background: #FFF8D1; /* Amarelo pastel cremoso para Limão e Manjericão */
+    }
+    .flavor-card.figo-india {
+      background: #FFE8D6; /* Laranja pastel cremoso para Figo da Índia */
     }
     .flavor-card img {
       width: 100%;
@@ -118,34 +89,110 @@
       object-fit: cover;
       border-radius: 5px;
     }
+    .flavor-card p.description {
+      font-size: 0.9em;
+      margin: 10px 0;
+      color: #555;
+    }
     .limited-edition {
-      color: #B22222;
+      color: #E30613; /* Vermelho Santini */
       font-weight: bold;
       margin-top: 10px;
       display: inline-block;
     }
-    .map-placeholder {
-      height: 400px;
-      background: #AEDFF7; /* Azul céu pastel */
-      margin: 20px 0;
+    /* Estilos para o Quiz */
+    .quiz-section {
+      background: #FFF9F0; /* Bege cremoso para o fundo da seção */
+      padding: 40px 20px;
+    }
+    .quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #FFFFFF; /* Fundo branco para o container do quiz */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    .quiz-question {
+      display: none;
+    }
+    .quiz-question.active {
+      display: block;
+      animation: fadeIn 0.5s;
+    }
+    .quiz-question h3 {
+      margin-bottom: 20px;
+    }
+    .quiz-options {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .quiz-options label {
+      background: #FFEDED; /* Vermelho muito claro para opções */
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .quiz-options label:hover {
+      background: #FFDADA; /* Tom um pouco mais escuro */
+    }
+    .quiz-options input {
+      display: none;
+    }
+    .quiz-options input:checked + label {
+      background: #E30613; /* Vermelho Santini */
+      color: #FFFFFF;
+    }
+    .quiz-navigation {
+      margin-top: 20px;
+      display: flex;
       justify-content: center;
-      color: #333;
-      font-size: 1.2em;
+      gap: 10px;
+    }
+    .quiz-result {
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s;
+    }
+    .quiz-result.active {
+      display: block;
+    }
+    .quiz-result img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+    .share-notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #E30613; /* Vermelho Santini */
+      color: #FFFFFF;
+      padding: 10px 20px;
+      border-radius: 5px;
+      display: none;
+      z-index: 1000;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .social-section {
-      background: #FFD1DC; /* Rosa claro pastel */
+      background: #FFFFFF; /* Fundo branco para a seção social */
       padding: 40px 20px;
     }
     .social-buttons a {
       margin: 0 15px;
-      color: #B22222;
+      color: #E30613; /* Vermelho Santini */
       font-size: 2em;
       text-decoration: none;
     }
     .footer {
-      background-color: #B22222;
+      background-color: #E30613; /* Vermelho Santini */
       color: #FFFFFF;
       padding: 30px 20px;
       text-align: center;
@@ -175,18 +222,18 @@
       background: #FFFFFF;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
       z-index: 1000;
     }
     #popup h3 {
       margin-top: 0;
-      color: #B22222;
+      color: #E30613; /* Vermelho Santini */
     }
     #popup input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border: 1px solid #AEDFF7;
+      border: 1px solid #FF9999; /* Vermelho claro derivado do Santini */
       border-radius: 5px;
     }
     @media (max-width: 768px) {
@@ -218,28 +265,74 @@
   <section class="section">
     <h2>Sabores de Verão 2025 (Edição Limitada)</h2>
     <div class="flavors-grid">
-      <div class="flavor-card">
-        <img src="Maracujá com hortelã.png" alt="Gelado de Maracujá com Hortelã">
+      <div class="flavor-card maracuja-hortela">
+        <img src="maracujahortela.png" alt="Gelado de Maracujá com Hortelã">
         <p>Maracujá com Hortelã</p>
+        <p class="description">Fresco e tropical, com um toque de hortelã que revigora o teu dia!</p>
         <span class="limited-edition">Edição Limitada</span>
       </div>
-      <div class="flavor-card">
-        <img src="https://via.placeholder.com/250x150.png?text=Limão+e+Manjericão" alt="Gelado de Limão e Manjericão">
+      <div class="flavor-card limao-manjericao">
+        <img src="limaomanjericao.png" alt="Gelado de Limão e Manjericão">
         <p>Limão e Manjericão</p>
+        <p class="description">Uma combinação cítrica e herbal, perfeita para um momento de pausa!</p>
         <span class="limited-edition">Edição Limitada</span>
       </div>
-      <div class="flavor-card">
-        <img src="https://via.placeholder.com/250x150.png?text=Figo+da+Índia" alt="Gelado de Figo da Índia">
+      <div class="flavor-card figo-india">
+        <img src="figodaindia.png" alt="Gelado de Figo da Índia">
         <p>Figo da Índia</p>
+        <p class="description">Exótico e doce, um sabor que te leva a uma aventura de verão!</p>
         <span class="limited-edition">Edição Limitada</span>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Mapa Interativo – Lojas Santini</h2>
-    <div class="map-placeholder">Mapa Interativo (Insira API Google Maps aqui)</div>
-    <button class="cta-button">Encontra a loja mais próxima de ti</button>
+  <section class="section quiz-section">
+    <h2>Quiz: Qual Sabor de Verão Combina Contigo?</h2>
+    <div class="quiz-container" id="quiz-container">
+      <div class="quiz-question active" id="question-1">
+        <h3>1. Qual é o teu plano ideal para o verão?</h3>
+        <div class="quiz-options">
+          <input type="radio" name="q1" id="q1-a" value="praia">
+          <label for="q1-a">Relaxar na praia</label>
+          <input type="radio" name="q1" id="q1-b" value="campo">
+          <label for="q1-b">Um piquenique no campo</label>
+          <input type="radio" name="q1" id="q1-c" value="aventura">
+          <label for="q1-c">Uma aventura exótica</label>
+        </div>
+      </div>
+      <div class="quiz-question" id="question-2">
+        <h3>2. Qual é o teu sabor preferido?</h3>
+        <div class="quiz-options">
+          <input type="radio" name="q2" id="q2-a" value="citrinos">
+          <label for="q2-a">Citrinos refrescantes</label>
+          <input type="radio" name="q2" id="q2-b" value="tropical">
+          <label for="q2-b">Frutas tropicais</label>
+          <input type="radio" name="q2" id="q2-c" value="exotico">
+          <label for="q2-c">Algo mais exótico</label>
+        </div>
+      </div>
+      <div class="quiz-question" id="question-3">
+        <h3>3. Como descreves o teu verão perfeito?</h3>
+        <div class="quiz-options">
+          <input type="radio" name="q3" id="q3-a" value="ensolarado">
+          <label for="q3-a">Ensolarado e vibrante</label>
+          <input type="radio" name="q3" id="q3-b" value="calmo">
+          <label for="q3-b">Calmo e relaxante</label>
+          <input type="radio" name="q3" id="q3-c" value="diferente">
+          <label for="q3-c">Diferente e único</label>
+        </div>
+      </div>
+      <div class="quiz-result" id="quiz-result">
+        <h3>O teu sabor de verão é...</h3>
+        <div id="result-content"></div>
+        <button class="cta-button" onclick="shareResult()">Partilhar Resultado</button>
+        <button class="cta-button" onclick="restartQuiz()">Tentar Novamente</button>
+      </div>
+      <div class="quiz-navigation">
+        <button class="cta-button" onclick="nextQuestion()">Próxima</button>
+      </div>
+    </div>
+    <div class="share-notification" id="share-notification">Texto copiado para partilhar! Cola nas redes sociais!</div>
   </section>
 
   <section class="section social-section">
@@ -254,7 +347,7 @@
   </section>
 
   <footer class="footer">
-    <img src="https://via.placeholder.com/150x50.png?text=Santini+Logo" alt="Logotipo Santini">
+    <img src="marketing.jpg" alt="Logotipo Santini">
     <div>
       <a href="#">Sabores</a>
       <a href="#">Lojas</a>
@@ -281,13 +374,127 @@
   </div>
 
   <script>
+    let currentQuestion = 1;
+    let answers = {};
+
+    const questionsCount = 3;
+    const results = {
+      "Maracujá com Hortelã": {
+        description: "És vibrante e adoras o sol! O Maracujá com Hortelã é perfeito para ti, com o seu toque tropical e refrescante, ideal para um dia na praia.",
+        image: "maracujahortela.png"
+      },
+      "Limão e Manjericão": {
+        description: "Gostas de momentos calmos e refrescantes! O Limão e Manjericão combina contigo, trazendo uma frescura única para um piquenique no campo.",
+        image: "limaomanjericao.png"
+      },
+      "Figo da Índia": {
+        description: "És aventureiro e adoras coisas únicas! O Figo da Índia é o teu sabor, com um toque exótico que combina com o teu espírito de verão.",
+        image: "figodaindia.png"
+      }
+    };
+
+    function nextQuestion() {
+      const current = document.getElementById(`question-${currentQuestion}`);
+      const selected = current.querySelector('input:checked');
+
+      if (!selected) {
+        alert('Por favor, seleciona uma opção antes de avançar!');
+        return;
+      }
+
+      answers[`q${currentQuestion}`] = selected.value;
+      current.classList.remove('active');
+
+      if (currentQuestion < questionsCount) {
+        currentQuestion++;
+        document.getElementById(`question-${currentQuestion}`).classList.add('active');
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.querySelector('.quiz-navigation').style.display = 'none';
+      const result = calculateResult();
+      const resultDiv = document.getElementById('quiz-result');
+      const resultContent = document.getElementById('result-content');
+      resultContent.innerHTML = `
+        <p>${result}</p>
+        <img src="${results[result].image}" alt="${result}">
+        <p>${results[result].description}</p>
+      `;
+      resultDiv.classList.add('active');
+    }
+
+    function calculateResult() {
+      const scores = {
+        "Maracujá com Hortelã": 0,
+        "Limão e Manjericão": 0,
+        "Figo da Índia": 0
+      };
+
+      // Pergunta 1: Plano ideal para o verão
+      if (answers.q1 === 'praia') scores["Maracujá com Hortelã"] += 1;
+      if (answers.q1 === 'campo') scores["Limão e Manjericão"] += 1;
+      if (answers.q1 === 'aventura') scores["Figo da Índia"] += 1;
+
+      // Pergunta 2: Sabor preferido
+      if (answers.q2 === 'tropical') scores["Maracujá com Hortelã"] += 1;
+      if (answers.q2 === 'citrinos') scores["Limão e Manjericão"] += 1;
+      if (answers.q2 === 'exotico') scores["Figo da Índia"] += 1;
+
+      // Pergunta 3: Verão perfeito
+      if (answers.q3 === 'ensolarado') scores["Maracujá com Hortelã"] += 1;
+      if (answers.q3 === 'calmo') scores["Limão e Manjericão"] += 1;
+      if (answers.q3 === 'diferente') scores["Figo da Índia"] += 1;
+
+      // Determinar o sabor com mais pontos
+      let maxScore = 0;
+      let result = "Maracujá com Hortelã";
+      for (const sabor in scores) {
+        if (scores[sabor] > maxScore) {
+          maxScore = scores[sabor];
+          result = sabor;
+        }
+      }
+      return result;
+    }
+
+    function shareResult() {
+      const result = calculateResult();
+      const shareText = `O meu sabor de verão Santini é ${result}! Descobre o teu em santini.pt! #MemóriaSantini`;
+
+      // Copiar texto para a área de transferência
+      navigator.clipboard.writeText(shareText).then(() => {
+        // Mostrar notificação
+        const notification = document.getElementById('share-notification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 3000); // Esconde após 3 segundos
+      }).catch(err => {
+        alert('Erro ao copiar o texto: ' + err);
+      });
+    }
+
+    function restartQuiz() {
+      currentQuestion = 1;
+      answers = {};
+      document.getElementById('quiz-result').classList.remove('active');
+      document.querySelector('.quiz-navigation').style.display = 'flex';
+      document.getElementById('question-1').classList.add('active');
+      document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+    }
+
     function showPopup() {
       document.getElementById('popup').style.display = 'block';
     }
+
     function hidePopup() {
       document.getElementById('popup').style.display = 'none';
     }
-    document.querySelector('form').addEventListener('submit', function(e) {
+
+    document.querySelector('#popup form').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Subscrição enviada! (Simulação)');
       hidePopup();
