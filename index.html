@@ -1,25 +1,27 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Vive o teu Verão à Santini com gelados artesanais. Descobre os novos sabores de edição limitada de 2025 e partilha as tuas memórias de verão.">
   <meta name="keywords" content="gelado artesanal Portugal, melhores gelados Lisboa, Santini verão 2025, sabores de verão">
   <title>Vive o teu Verão à Santini</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #FFFFFF;
+      background: linear-gradient(135deg, #f5f7f5 0%, #e8ece8 100%);
       color: #333;
-      line-height: 1.6;
+      line-height: 1.8;
     }
     h1, h2 {
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
+      color: #C20510;
     }
     .hero {
       background: url('background.png') no-repeat center center/cover;
@@ -39,6 +41,8 @@
       font-size: 2.8em;
       margin-bottom: 10px;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      -webkit-text-stroke: 2px #FFFFFF;
+      text-stroke: 2px #FFFFFF;
     }
     .hero-content p {
       font-size: 1.3em;
@@ -46,72 +50,108 @@
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
     .cta-button {
-      background-color: #E30613; /* Vermelho Santini */
+      background-color: #C20510;
       color: #FFFFFF;
       padding: 12px 24px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 1.2em;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
     .cta-button:hover {
-      background-color: #C20510; /* Tom mais escuro do vermelho Santini */
+      background-color: #A0040D;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     .section {
-      padding: 60px 20px;
+      padding: 80px 30px;
       text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
     }
     .flavors-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
     }
     .flavor-card {
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
       position: relative;
+      background: #FFFFFF;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .flavor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     }
     .flavor-card.maracuja-hortela {
-      background: #D9E8D6; /* Verde pastel cremoso para Maracujá com Hortelã */
+      background: #E6F0E2;
     }
     .flavor-card.limao-manjericao {
-      background: #FFF8D1; /* Amarelo pastel cremoso para Limão e Manjericão */
+      background: #FDFAE5;
     }
     .flavor-card.figo-india {
-      background: #FFE8D6; /* Laranja pastel cremoso para Figo da Índia */
+      background: #FFF3E8;
     }
     .flavor-card img {
       width: 100%;
-      height: 150px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 5px;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .flavor-card img:hover {
+      transform: scale(1.05);
     }
     .flavor-card p.description {
-      font-size: 0.9em;
+      font-size: 0.95em;
       margin: 10px 0;
       color: #555;
     }
     .limited-edition {
-      color: #E30613; /* Vermelho Santini */
+      color: #C20510;
       font-weight: bold;
       margin-top: 10px;
       display: inline-block;
+      font-size: 0.9em;
+      background: rgba(194, 5, 16, 0.1);
+      padding: 5px 10px;
+      border-radius: 5px;
     }
-    /* Estilos para o Quiz */
+    .explore-more {
+      display: inline-block;
+      margin-top: 40px;
+      background-color: #C20510;
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .explore-more:hover {
+      background-color: #A0040D;
+      transform: scale(1.05);
+    }
     .quiz-section {
-      background: #FFF9F0; /* Bege cremoso para o fundo da seção */
-      padding: 40px 20px;
+      background: #FFF9F0;
+      padding: 80px 30px;
     }
     .quiz-container {
       max-width: 600px;
       margin: 0 auto;
-      background: #FFFFFF; /* Fundo branco para o container do quiz */
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      background: #FFFFFF;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     }
     .quiz-question {
       display: none;
@@ -122,6 +162,7 @@
     }
     .quiz-question h3 {
       margin-bottom: 20px;
+      color: #333;
     }
     .quiz-options {
       display: flex;
@@ -129,20 +170,20 @@
       gap: 10px;
     }
     .quiz-options label {
-      background: #FFEDED; /* Vermelho muito claro para opções */
+      background: #FFEDED;
       padding: 15px;
       border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s ease;
     }
     .quiz-options label:hover {
-      background: #FFDADA; /* Tom um pouco mais escuro */
+      background: #FFDADA;
     }
     .quiz-options input {
       display: none;
     }
     .quiz-options input:checked + label {
-      background: #E30613; /* Vermelho Santini */
+      background: #C20510;
       color: #FFFFFF;
     }
     .quiz-navigation {
@@ -170,7 +211,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: #E30613; /* Vermelho Santini */
+      background: #C20510;
       color: #FFFFFF;
       padding: 10px 20px;
       border-radius: 5px;
@@ -181,21 +222,31 @@
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
     .social-section {
-      background: #FFFFFF; /* Fundo branco para a seção social */
-      padding: 40px 20px;
+      background: #FFFFFF;
+      padding: 80px 30px;
     }
     .social-buttons a {
-      margin: 0 15px;
-      color: #E30613; /* Vermelho Santini */
+      margin: 0 20px;
+      color: #C20510;
       font-size: 2em;
       text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-buttons a:hover {
+      color: #A0040D;
     }
     .footer {
-      background-color: #E30613; /* Vermelho Santini */
+      background-color: #C20510;
       color: #FFFFFF;
-      padding: 30px 20px;
+      padding: 40px 20px;
       text-align: center;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
     }
     .footer img {
       width: 150px;
@@ -203,15 +254,70 @@
     }
     .footer a {
       color: #FFFFFF;
-      margin: 0 15px;
+      margin: 0 20px;
       text-decoration: none;
       font-size: 1em;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .footer a:hover {
+      color: #FFEDED;
     }
     .footer input {
-      padding: 10px;
+      padding: 12px;
       border: none;
-      border-radius: 5px;
-      margin-top: 10px;
+      border-radius: 8px;
+      margin: 15px 0;
+      width: 250px;
+      font-size: 1em;
+    }
+    .footer input::placeholder {
+      color: #999;
+    }
+    .footer form {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer .subscribe-button {
+      background: linear-gradient(135deg, #D91622 0%, #C20510 100%);
+      padding: 14px 30px;
+      font-size: 1.3em;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: pulse 2s infinite;
+    }
+    .footer .subscribe-button:hover {
+      background: #A0040D;
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    .privacy-checkbox {
+      margin: 8px 0;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+    .privacy-checkbox input {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+    }
+    .privacy-checkbox label {
+      margin: 0;
+      line-height: 1.2;
+    }
+    .footer .privacy-checkbox {
+      color: #FFFFFF;
+    }
+    .footer .privacy-checkbox a {
+      color: #FFEDED;
+      text-decoration: underline;
+    }
+    .footer .privacy-checkbox a:hover {
+      color: #FFDADA;
     }
     #popup {
       display: none;
@@ -220,21 +326,58 @@
       left: 50%;
       transform: translate(-50%, -50%);
       background: #FFFFFF;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
       z-index: 1000;
+      max-width: 400px;
+      width: 90%;
+      border: 1px solid #FF9999;
     }
     #popup h3 {
-      margin-top: 0;
-      color: #E30613; /* Vermelho Santini */
+      margin: 0 0 20px;
+      color: #C20510;
+      font-size: 1.5em;
+      text-align: center;
     }
     #popup input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
-      border: 1px solid #FF9999; /* Vermelho claro derivado do Santini */
-      border-radius: 5px;
+      border: 1px solid #FF9999;
+      border-radius: 8px;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+    #popup .cta-button {
+      width: 100%;
+      margin: 15px 0;
+    }
+    #popup .privacy-checkbox {
+      color: #333;
+      justify-content: flex-start;
+      margin: 10px auto;
+      max-width: fit-content;
+    }
+    #popup .privacy-checkbox label {
+      white-space: nowrap;
+    }
+    #popup .privacy-checkbox a {
+      color: #A0040D;
+      text-decoration: underline;
+    }
+    #popup .privacy-checkbox a:hover {
+      color: #80030A;
+    }
+    .footer-links {
+      margin-top: 20px;
+    }
+    .footer-links a {
+      color: #FFEDED;
+      text-decoration: underline;
+    }
+    .footer-links a:hover {
+      color: #FFDADA;
     }
     @media (max-width: 768px) {
       .hero {
@@ -250,6 +393,19 @@
         font-size: 1em;
         padding: 10px 20px;
       }
+      .footer .subscribe-button {
+        padding: 12px 24px;
+        font-size: 1.2em;
+      }
+      .section {
+        padding: 40px 15px;
+      }
+      .footer input {
+        width: 200px;
+      }
+      #popup {
+        padding: 30px;
+      }
     }
   </style>
 </head>
@@ -258,7 +414,7 @@
     <div class="hero-content">
       <h1>Vive o teu Verão à Santini</h1>
       <p>Descobre os novos sabores da estação, vive momentos únicos e começa a tua coleção de memórias.</p>
-      <button class="cta-button" onclick="showPopup()">Subscreve e ganha um gelado grátis</button>
+      <button class="cta-button" onclick="showPopup()" aria-label="Abrir formulário de subscrição">Subscreve agora e ganha um gelado grátis até 31/08!</button>
     </div>
   </header>
 
@@ -266,24 +422,25 @@
     <h2>Sabores de Verão 2025 (Edição Limitada)</h2>
     <div class="flavors-grid">
       <div class="flavor-card maracuja-hortela">
-        <img src="maracujahortela.png" alt="Gelado de Maracujá com Hortelã">
+        <img src="maracuja.png" alt="Gelado de Maracujá com Hortelã" loading="lazy">
         <p>Maracujá com Hortelã</p>
         <p class="description">Fresco e tropical, com um toque de hortelã que revigora o teu dia!</p>
         <span class="limited-edition">Edição Limitada</span>
       </div>
       <div class="flavor-card limao-manjericao">
-        <img src="limaomanjericao.png" alt="Gelado de Limão e Manjericão">
+        <img src="limao.png" alt="Gelado de Limão e Manjericão" loading="lazy">
         <p>Limão e Manjericão</p>
         <p class="description">Uma combinação cítrica e herbal, perfeita para um momento de pausa!</p>
         <span class="limited-edition">Edição Limitada</span>
       </div>
       <div class="flavor-card figo-india">
-        <img src="figodaindia.png" alt="Gelado de Figo da Índia">
+        <img src="figo.png" alt="Gelado de Figo da Índia" loading="lazy">
         <p>Figo da Índia</p>
         <p class="description">Exótico e doce, um sabor que te leva a uma aventura de verão!</p>
         <span class="limited-edition">Edição Limitada</span>
       </div>
     </div>
+    <a href="sabores.html" class="explore-more">Explorar Todos os Sabores</a>
   </section>
 
   <section class="section quiz-section">
@@ -325,11 +482,11 @@
       <div class="quiz-result" id="quiz-result">
         <h3>O teu sabor de verão é...</h3>
         <div id="result-content"></div>
-        <button class="cta-button" onclick="shareResult()">Partilhar Resultado</button>
-        <button class="cta-button" onclick="restartQuiz()">Tentar Novamente</button>
+        <button class="cta-button" onclick="shareResult()" aria-label="Partilhar resultado do quiz">Partilhar Resultado</button>
+        <button class="cta-button" onclick="restartQuiz()" aria-label="Reiniciar o quiz">Tentar Novamente</button>
       </div>
       <div class="quiz-navigation">
-        <button class="cta-button" onclick="nextQuestion()">Próxima</button>
+        <button class="cta-button" onclick="nextQuestion()" aria-label="Avançar para a próxima pergunta">Próxima</button>
       </div>
     </div>
     <div class="share-notification" id="share-notification">Texto copiado para partilhar! Cola nas redes sociais!</div>
@@ -339,37 +496,44 @@
     <h2>Partilha a tua memória Santini</h2>
     <p>Cada gelado conta uma história. Qual é a tua?</p>
     <div class="social-buttons">
-      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/geladosantini/" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.tiktok.com/@gelados.santini" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
     <p>Partilha uma foto ou vídeo com o teu momento Santini e entra na galeria do verão! #MemóriaSantini</p>
   </section>
 
   <footer class="footer">
-    <img src="marketing.jpg" alt="Logotipo Santini">
-    <div>
-      <a href="#">Sabores</a>
-      <a href="#">Lojas</a>
-      <a href="#">Contactos</a>
-      <a href="#">Política de Privacidade</a>
-    </div>
+    <img src="marketing.jpg" alt="Logotipo oficial da Santini" loading="lazy">
     <p>Subscreve a nossa newsletter:</p>
-    <input type="email" placeholder="O teu email">
+    <form id="footer-form">
+      <input type="email" placeholder="O teu email" required>
+      <button type="submit" class="cta-button subscribe-button" aria-label="Subscrever newsletter">Subscrever</button>
+      <div class="privacy-checkbox">
+        <input type="checkbox" id="footer-privacy" required>
+        <label for="footer-privacy">Aceito a <a href="politica-privacidade.html" target="_blank">política de privacidade</a></label>
+      </div>
+    </form>
     <div class="social-buttons">
-      <a href="https://www.instagram.com/geladosantini?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/geladosantini/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@gelados.santini" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.santini.pt/" target="_blank"><i class="fas fa-globe"></i></a>
+    </div>
+    <div class="footer-links">
+      <a href="politica-privacidade.html" target="_blank">Política de Privacidade</a>
     </div>
   </footer>
 
   <div id="popup">
-    <h3>Subscreve para um gelado grátis!</h3>
-    <form>
+    <h3>Subscreve para um gelado grátis até 31/08!</h3>
+    <form id="popup-form">
       <input type="text" placeholder="Nome" required>
       <input type="email" placeholder="Email" required>
-      <button type="submit" class="cta-button">Enviar</button>
-      <button type="button" class="cta-button" onclick="hidePopup()">Fechar</button>
+      <div class="privacy-checkbox">
+        <input type="checkbox" id="popup-privacy" required>
+        <label for="popup-privacy">Aceito a <a href="politica-privacidade.html" target="_blank">política de privacidade</a></label>
+      </div>
+      <button type="submit" class="cta-button" aria-label="Enviar subscrição">Enviar</button>
+      <button type="button" class="cta-button" onclick="hidePopup()" aria-label="Fechar formulário">Fechar</button>
     </form>
   </div>
 
@@ -381,15 +545,15 @@
     const results = {
       "Maracujá com Hortelã": {
         description: "És vibrante e adoras o sol! O Maracujá com Hortelã é perfeito para ti, com o seu toque tropical e refrescante, ideal para um dia na praia.",
-        image: "maracujahortela.png"
+        image: "maracuja.png"
       },
       "Limão e Manjericão": {
         description: "Gostas de momentos calmos e refrescantes! O Limão e Manjericão combina contigo, trazendo uma frescura única para um piquenique no campo.",
-        image: "limaomanjericao.png"
+        image: "limao.png"
       },
       "Figo da Índia": {
         description: "És aventureiro e adoras coisas únicas! O Figo da Índia é o teu sabor, com um toque exótico que combina com o teu espírito de verão.",
-        image: "figodaindia.png"
+        image: "figo.png"
       }
     };
 
@@ -420,7 +584,7 @@
       const resultContent = document.getElementById('result-content');
       resultContent.innerHTML = `
         <p>${result}</p>
-        <img src="${results[result].image}" alt="${result}">
+        <img src="${results[result].image}" alt="${result}" loading="lazy">
         <p>${results[result].description}</p>
       `;
       resultDiv.classList.add('active');
@@ -433,22 +597,18 @@
         "Figo da Índia": 0
       };
 
-      // Pergunta 1: Plano ideal para o verão
       if (answers.q1 === 'praia') scores["Maracujá com Hortelã"] += 1;
       if (answers.q1 === 'campo') scores["Limão e Manjericão"] += 1;
       if (answers.q1 === 'aventura') scores["Figo da Índia"] += 1;
 
-      // Pergunta 2: Sabor preferido
       if (answers.q2 === 'tropical') scores["Maracujá com Hortelã"] += 1;
       if (answers.q2 === 'citrinos') scores["Limão e Manjericão"] += 1;
       if (answers.q2 === 'exotico') scores["Figo da Índia"] += 1;
 
-      // Pergunta 3: Verão perfeito
       if (answers.q3 === 'ensolarado') scores["Maracujá com Hortelã"] += 1;
       if (answers.q3 === 'calmo') scores["Limão e Manjericão"] += 1;
       if (answers.q3 === 'diferente') scores["Figo da Índia"] += 1;
 
-      // Determinar o sabor com mais pontos
       let maxScore = 0;
       let result = "Maracujá com Hortelã";
       for (const sabor in scores) {
@@ -464,14 +624,12 @@
       const result = calculateResult();
       const shareText = `O meu sabor de verão Santini é ${result}! Descobre o teu em santini.pt! #MemóriaSantini`;
 
-      // Copiar texto para a área de transferência
       navigator.clipboard.writeText(shareText).then(() => {
-        // Mostrar notificação
         const notification = document.getElementById('share-notification');
         notification.style.display = 'block';
         setTimeout(() => {
           notification.style.display = 'none';
-        }, 3000); // Esconde após 3 segundos
+        }, 3000);
       }).catch(err => {
         alert('Erro ao copiar o texto: ' + err);
       });
@@ -494,10 +652,24 @@
       document.getElementById('popup').style.display = 'none';
     }
 
-    document.querySelector('#popup form').addEventListener('submit', function(e) {
+    document.querySelector('#popup-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      alert('Subscrição enviada! (Simulação)');
-      hidePopup();
+      if (document.getElementById('popup-privacy').checked) {
+        alert('Subscrição enviada! (Simulação)');
+        hidePopup();
+      } else {
+        alert('Por favor, aceita a política de privacidade.');
+      }
+    });
+
+    document.querySelector('#footer-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (document.getElementById('footer-privacy').checked) {
+        alert('Subscrição enviada! (Simulação)');
+        document.getElementById('footer-form').reset();
+      } else {
+        alert('Por favor, aceita a política de privacidade.');
+      }
     });
   </script>
 </body>

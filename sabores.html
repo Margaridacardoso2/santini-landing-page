@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explora os deliciosos sabores de gelados artesanais da Santini, incluindo as edições limitadas de 2025.">
+  <meta name="keywords" content="sabores Santini, gelados artesanais, Santini 2025, edições limitadas">
+  <title>Sabores - Santini</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7f5 0%, #e8ece8 100%);
+      color: #333;
+      line-height: 1.8;
+    }
+    h1, h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      color: #C20510;
+    }
+    .back-arrow {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 1.5em;
+      color: #C20510;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+    .back-arrow:hover {
+      color: #A0040D;
+      transform: scale(1.2);
+    }
+    .section {
+      padding: 80px 30px;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+    }
+    .section p {
+      font-size: 1.1em;
+      color: #666;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .flavors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .flavor-card {
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      position: relative;
+      background: #FFFFFF;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .flavor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+    .flavor-card.maracuja-hortela {
+      background: #E6F0E2;
+    }
+    .flavor-card.limao-manjericao {
+      background: #FDFAE5;
+    }
+    .flavor-card.figo-india {
+      background: #FFF3E8;
+    }
+    .flavor-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .flavor-card img:hover {
+      transform: scale(1.05);
+    }
+    .flavor-card p {
+      margin: 10px 0;
+    }
+    .flavor-card p.description {
+      font-size: 0.95em;
+      color: #555;
+    }
+    .flavor-card .nutrition {
+      font-size: 0.85em;
+      color: #777;
+      margin-top: 10px;
+    }
+    .flavor-card .combination {
+      font-size: 0.9em;
+      color: #444;
+      margin-top: 5px;
+      font-style: italic;
+    }
+    .limited-edition {
+      color: #C20510;
+      font-weight: bold;
+      margin-top: 10px;
+      display: inline-block;
+      font-size: 0.9em;
+      background: rgba(194, 5, 16, 0.1);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .history {
+      max-width: 900px;
+      margin: 60px auto;
+      text-align: left;
+      background: #FFFFFF;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    .history h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    .history p {
+      color: #666;
+      font-size: 1em;
+    }
+    .footer {
+      background-color: #C20510;
+      color: #FFFFFF;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .footer img {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+    .footer input {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 15px;
+      width: 250px;
+      font-size: 1em;
+    }
+    .footer input::placeholder {
+      color: #999;
+    }
+    .social-buttons a {
+      margin: 0 20px;
+      color: #ffffff;
+      font-size: 2em;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .social-buttons a:hover {
+      color: #4A5A3E;
+    }
+    @media (max-width: 768px) {
+      .section {
+        padding: 40px 15px;
+      }
+      .section h1 {
+        font-size: 2.2em;
+      }
+      .history {
+        margin: 30px auto;
+        padding: 20px;
+      }
+      .footer input {
+        width: 200px;
+      }
+      .back-arrow {
+        top: 15px;
+        left: 15px;
+        font-size: 1.3em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
+  <section class="section">
+    <h1>Sabores Santini</h1>
+    <p>Descobre a nossa coleção de gelados artesanais, com destaque para as edições limitadas de 2025. Cada sabor é cuidadosamente elaborado com ingredientes frescos e naturais, refletindo a tradição e inovação da Santini.</p>
+    <div class="flavors-grid">
+      <div class="flavor-card maracuja-hortela">
+        <img src="maracuja.png" alt="Gelado de Maracujá com Hortelã">
+        <p>Maracujá com Hortelã</p>
+        <p class="description">Fresco e tropical, com um toque de hortelã que revigora o teu dia! Este sabor combina a doçura ácida do maracujá com a frescura natural da hortelã, criando uma experiência única para os dias quentes de verão.</p>
+        <p class="nutrition">Aprox.: 180 kcal por bola, sem glúten, com açúcar natural.</p>
+        <p class="combination">Sugestão: Combina com um topping de coco ralado ou uma bola de baunilha.</p>
+        <span class="limited-edition">Edição Limitada</span>
+      </div>
+      <div class="flavor-card limao-manjericao">
+        <img src="limao.png" alt="Gelado de Limão e Manjericão">
+        <p>Limão e Manjericão</p>
+        <p class="description">Uma combinação cítrica e herbal, perfeita para um momento de pausa! O sumo fresco de limão é misturado com folhas de manjericão, oferecendo um equilíbrio refrescante e aromático ideal para tardes tranquilas.</p>
+        <p class="nutrition">Aprox.: 160 kcal por bola, sem glúten, baixo em gordura.</p>
+        <p class="combination">Sugestão: Acompanha com um toque de mel ou uma bola de morango.</p>
+        <span class="limited-edition">Edição Limitada</span>
+      </div>
+      <div class="flavor-card figo-india">
+        <img src="figo.png" alt="Gelado de Figo da Índia">
+        <p>Figo da Índia</p>
+        <p class="description">Exótico e doce, um sabor que te leva a uma aventura de verão! Inspirado no figo da Índia, este gelado traz uma textura suave com um sabor frutado único, enriquecido com pequenas sementes que adicionam um toque crocante.</p>
+        <p class="nutrition">Aprox.: 200 kcal por bola, sem glúten, rico em vitamina C.</p>
+        <p class="combination">Sugestão: Experimenta com um topping de amêndoas ou uma bola de chocolate negro.</p>
+        <span class="limited-edition">Edição Limitada</span>
+      </div>
+    </div>
+    <div class="history">
+      <h2>Histórico das Edições Limitadas</h2>
+      <p>A Santini tem uma tradição de criar sabores de edição limitada desde 2010, celebrando as estações e a cultura local. Em 2025, a coleção de verão foi inspirada nas paisagens portuguesas e nas frutas sazonais, com os sabores Maracujá com Hortelã, Limão e Manjericão, e Figo da Índia a destacar a frescura e a diversidade. Estas edições são produzidas em lotes limitados, garantindo a exclusividade e a qualidade artesanal que nos define.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <img src="marketing.jpg" alt="Logotipo Santini">
+    <p>Subscreve a nossa newsletter:</p>
+    <input type="email" placeholder="O teu email">
+    <div class="social-buttons">
+      <a href="https://www.instagram.com/geladosantini/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@gelados.santini" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.santini.pt/" target="_blank"><i class="fas fa-globe"></i></a>
+    </div>
+  </footer>
+</body>
+</html>
